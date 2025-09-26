@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Basic SEO Meta Tags -->
+    <meta name="description" content="A responsive bank dashboard UI built with HTML, CSS, and JavaScript. Includes account summaries, transactions, spending charts, and transfer forms.">
+    <meta name="author" content="Governor Believe">
+
+    <!-- Social Media (Open Graph / Facebook) -->
+    <meta property="og:title" content="TrustedVault - Bank Dashboard">
+    <meta property="og:description" content="A modern, responsive bank dashboard UI built with HTML, CSS, and JavaScript.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gov-beli.github.io/TrustedVault-Dashboard/">
+    <meta property="og:image" content="https://gov-beli.github.io/TrustedVault-Dashboard/preview.png">
+
+    <title>TrustedVault-Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-landmark"></i>
+                <h1>TrustedVault</h1>
+            </div>
+            <div class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-wallet"></i>
+                <span>Accounts</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-exchange-alt"></i>
+                <span>Transfers</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Analytics</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-credit-card"></i>
+                <span>Cards</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-question-circle"></i>
+                <span>Support</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <div class="welcome">
+                    <h2>Welcome Back, Governor</h2>
+                    <p>A quick snapshot of your financial health</p>
+                </div>
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search transactions...">
+                </div>
+                <div class="user-menu">
+                    <div class="notification">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <div class="user-avatar">GB</div>
+                        <span>Governor B.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Summary -->
+            <div class="section-title">
+                <h3>Account Summary</h3>
+                <button class="action-btn"><i class="fas fa-plus"></i> Add Account</button>
+            </div>
+            <div class="account-cards">
+                <div class="card account-card">
+                    <p class="account-type">Checking Account</p>
+                    <h2 class="balance">$10,560.75</h2>
+                    <p class="account-number">**** **** **** 4567</p>
+                    <div class="account-actions">
+                        <button class="action-btn"><i class="fa-solid fa-download"></i> Statement</button>
+                        <button class="action-btn"><i class="fa-regular fa-paper-plane"></i> Transfer</button>
+                        <button class="action-btn"><i class="fa-solid fa-eye"></i> Details</button>
+                    </div>
+                </div>
+                <div class="card account-card">
+                    <p class="account-type">Savings Account</p>
+                    <h2 class="balance">$25,890.42</h2>
+                    <p class="account-number">**** **** **** 8910</p>
+                    <div class="account-actions">
+                         <button class="action-btn"><i class="fa-solid fa-download"></i> Statement</button>
+                        <button class="action-btn"><i class="fa-regular fa-paper-plane"></i> Transfer</button>
+                        <button class="action-btn"><i class="fa-solid fa-eye"></i> Details</button>
+                    </div>
+                </div>
+                <div class="card account-card">
+                    <p class="account-type">Investment Account</p>
+                    <h2 class="balance">$50,342.18</h2>
+                    <p class="account-number">**** **** **** 1234</p>
+                    <div class="account-actions">
+                        <button class="action-btn"><i class="fa-solid fa-download"></i> Statement</button>
+                        <button class="action-btn"><i class="fa-regular fa-paper-plane"></i> Transfer</button>
+                        <button class="action-btn"><i class="fa-solid fa-eye"></i> Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart and Transactions Grid -->
+            <div class="dashboard-grid">
+                <!-- Spending Chart -->
+                <div class="card">
+                    <div class="chart-header">
+                        <h3>Monthly Spending</h3>
+                        <div class="chart-filter">
+                            <button class="chart-filter-btn active">Month</button>
+                            <button class="chart-filter-btn">Week</button>
+                            <button class="chart-filter-btn">Year</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="spendingChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="card">
+                    <div class="section-title">
+                        <h3>Recent Transactions</h3>
+                        <button class="action-btn"><i class="fa-solid fa-filter"></i> Filter</button>
+                    </div>
+                    <table class="transaction-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="transaction-merchant">
+                                        <div class="merchant-icon">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </div>
+                                        <div>
+                                            <div>Amazon Purchase</div>
+                                            <div style="color: var(--text-light); font-size: 14px;">Online Shopping</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Jan 12, 2025</td>
+                                <td class="transaction-amount debit">-$85.23</td>
+                                <td><span class="transaction-status status-completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="transaction-merchant">
+                                        <div class="merchant-icon">
+                                            <i class="fa-solid fa-money-check-dollar"></i>
+                                        </div>
+                                        <div>
+                                            <div>Salary Deposit</div>
+                                            <div style="color: var(--text-light); font-size: 14px;">XYZ Corporation</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Jan 10, 2025</td>
+                                <td class="transaction-amount credit">+$2,450.00</td>
+                                <td><span class="transaction-status status-completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="transaction-merchant">
+                                        <div class="merchant-icon">
+                                            <i class="fa-solid fa-house-user"></i>
+                                        </div>
+                                        <div>
+                                            <div>Rent Payment</div>
+                                            <div style="color: var(--text-light); font-size: 14px;">Housing</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>May 5, 2025</td>
+                                <td class="transaction-amount debit">-$1,200.00</td>
+                                <td><span class="transaction-status status-completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="transaction-merchant">
+                                        <div class="merchant-icon">
+                                            <i class="fa-solid fa-utensils"></i>
+                                        </div>
+                                        <div>
+                                            <div>Restaurant Payment</div>
+                                            <div style="color: var(--text-light); font-size: 14px;">Dining</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Feb 3, 2025</td>
+                                <td class="transaction-amount debit">-$64.50</td>
+                                <td><span class="transaction-status status-completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="transaction-merchant">
+                                        <div class="merchant-icon">
+                                            <i class="fa-solid fa-gas-pump"></i>
+                                        </div>
+                                        <div>
+                                            <div>Gas Station</div>
+                                            <div style="color: var(--text-light); font-size: 14px;">Fuel</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Oct 1, 2023</td>
+                                <td class="transaction-amount debit">-$48.75</td>
+                                <td><span class="transaction-status status-pending">Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Quick Transfer -->
+            <div class="card">
+                <div class="section-title">
+                    <h3>Quick Transfer</h3>
+                </div>
+                <div class="transfer-form">
+                    <div class="form-group">
+                        <label for="from-account">From Account</label>
+                        <select class="form-control" id="from-account">
+                            <option>Checking Account (****4567)</option>
+                            <option>Savings Account (****8910)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="to-account">To Account</label>
+                        <select class="form-control" id="to-account">
+                            <option>Select recipient</option>
+                            <option>Governor Mega (****2389)</option>
+                            <option>Governor Believe (****7821)</option>
+                            <option>Governor Christabel (****5623)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="text" class="form-control" id="amount" placeholder="$0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" id="description" placeholder="Optional">
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="margin-top: 10px;">Transfer Money</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Simple JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Notification badge click
+            const notification = document.querySelector('.notification');
+            if (notification) {
+                notification.addEventListener('click', function() {
+                    alert('You have 3 new notifications!');
+                });
+            }
+            
+            // Account action buttons
+            const actionButtons = document.querySelectorAll('.action-btn');
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const text = this.textContent.trim();
+                    if (text.includes('Statement')) {
+                        alert('Downloading statement...');
+                    } else if (text.includes('Transfer')) {
+                        alert('Opening transfer window...');
+                    } else if (text.includes('Details')) {
+                        alert('Showing account details...');
+                    } else if (text.includes('Filter')) {
+                        alert('Opening filter options...');
+                    }
+                });
+            });
+            
+            // Transfer button
+            const transferBtn = document.querySelector('.btn-primary');
+            if (transferBtn) {
+                transferBtn.addEventListener('click', function() {
+                    const amount = document.getElementById('amount').value;
+                    const toAccount = document.getElementById('to-account').value;
+                    
+                    if (!amount || amount === '$0.00') {
+                        alert('Please enter a valid amount');
+                        return;
+                    }
+                    
+                    if (!toAccount || toAccount === 'Select recipient') {
+                        alert('Please select a recipient');
+                        return;
+                    }
+                    
+                    alert(`Transferring ${amount} to ${toAccount}...`);
+                });
+            }
+            
+            // Chart filter buttons
+            const chartFilterButtons = document.querySelectorAll('.chart-filter-btn');
+            chartFilterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    chartFilterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    // In a real app, you would update the chart data based on the selected filter
+                    alert(`Filter changed to: ${this.textContent}`);
+                });
+            });
+            
+            // Initialize spending chart
+            const ctx = document.getElementById('spendingChart').getContext('2d');
+            const spendingChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Housing', 'Food', 'Transport', 'Shopping', 'Entertainment', 'Utilities'],
+                    datasets: [{
+                        label: 'Spending by Category ($)',
+                        data: [1200, 450, 220, 320, 180, 150],
+                        backgroundColor: [
+                            'rgba(52, 211, 153, 0.7)',
+                            'rgba(26, 86, 219, 0.7)',
+                            'rgba(245, 158, 11, 0.7)',
+                            'rgba(229, 62, 62, 0.7)',
+                            'rgba(139, 92, 246, 0.7)',
+                            'rgba(6, 182, 212, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgb(52, 211, 153)',
+                            'rgb(26, 86, 219)',
+                            'rgb(245, 158, 11)',
+                            'rgb(229, 62, 62)',
+                            'rgb(139, 92, 246)',
+                            'rgb(6, 182, 212)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
